@@ -3,10 +3,8 @@ import { ArrowDown, ArrowUpRight } from "lucide-react"
 import { useHeroProgress } from "@/hooks/use-hero-progress"
 import DownloadButton from "@/components/ui/button-download"
 import { Wordmark } from "@/components/muvora-mark"
-import { APK, FALLBACK_VERSION, IMAGES, MIN_ANDROID, REPO_URL, apkUrl } from "@/config"
+import { IMAGES, REPO_URL, apkUrl } from "@/config"
 import { useDownload } from "@/hooks/use-download"
-import type { ReleaseInfo } from "@/hooks/use-latest-release"
-import { formatSize } from "@/lib/utils"
 
 const NAV = [
   { href: "#features", label: "Features" },
@@ -29,12 +27,10 @@ const CAPABILITIES = [
   "Free & open source",
 ]
 
-export function Hero({ release }: { release: ReleaseInfo | null }) {
+export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   useHeroProgress(sectionRef)
   const { status, progress, start } = useDownload(apkUrl("arm64"))
-  const version = release?.version ?? FALLBACK_VERSION
-  const size = formatSize(release?.sizes[APK.arm64])
 
   return (
     <section id="top" ref={sectionRef} className="px-2.5 pt-2.5 sm:px-4 sm:pt-4">
@@ -99,7 +95,7 @@ export function Hero({ release }: { release: ReleaseInfo | null }) {
               href="#download"
               className="rounded-full border border-primary/60 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-black sm:hidden"
             >
-              Get APK
+              Get it
             </a>
           </nav>
         </header>
@@ -145,11 +141,7 @@ export function Hero({ release }: { release: ReleaseInfo | null }) {
           style={{ animationDelay: "600ms" }}
         >
           <div className="flex gap-4">
-            <div className="flex flex-col font-mono text-[10px] uppercase tracking-widest">
-              <span className="text-white/50">Build</span>
-              <span className="text-primary">v{version}</span>
-            </div>
-            <ul className="border-l border-white/25 pl-4 text-[13px] font-extrabold uppercase leading-[1.35] tracking-tight text-white sm:text-[15px]">
+            <ul className="text-[13px] font-extrabold uppercase leading-[1.35] tracking-tight text-white sm:text-[15px]">
               {CAPABILITIES.map((c) => (
                 <li key={c}>{c}</li>
               ))}
@@ -161,14 +153,14 @@ export function Hero({ release }: { release: ReleaseInfo | null }) {
               downloadStatus={status}
               progress={progress}
               onClick={start}
-              idleLabel="Download APK"
+              idleLabel="Download Muvora"
               workingLabel="Starting"
               doneLabel="Check downloads"
               className="h-14 w-full rounded-2xl text-[15px] font-bold shadow-[0_18px_50px_-15px_rgba(200,255,61,0.6)] transition-shadow duration-300 hover:shadow-[0_22px_60px_-12px_rgba(200,255,61,0.75)] sm:w-60"
             />
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/55">
-              {MIN_ANDROID} · arm64{size ? ` · ${size}` : ""}
-              <span className="hidden sm:inline"> · always the latest build</span>
+              Free · for Android
+              <span className="hidden sm:inline"> · always the latest</span>
             </p>
             <a
               href="#download"

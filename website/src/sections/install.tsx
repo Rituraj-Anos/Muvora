@@ -1,17 +1,15 @@
-import { ArrowUpRight, BellRing, Cpu, Download, Smartphone } from "lucide-react"
+import { ArrowUpRight, BellRing, Download, Smartphone } from "lucide-react"
 import { DownloadShowcase, type DownloadCardProps } from "@/components/ui/download-options-section"
 import { MiniPhone } from "@/components/phone-mockup"
 import { MuvoraMark } from "@/components/muvora-mark"
 import { SectionLabel } from "@/components/section-label"
-import { APK, FALLBACK_VERSION, FIREBASE_INVITE_URL, IMAGES, MIN_ANDROID, RELEASES_URL, apkUrl } from "@/config"
-import type { ReleaseInfo } from "@/hooks/use-latest-release"
-import { formatDate, formatSize } from "@/lib/utils"
+import { FIREBASE_INVITE_URL, IMAGES, RELEASES_URL, apkUrl } from "@/config"
 
 const STEPS = [
-  { title: "Download", body: "Grab the APK above. Most phones want the arm64 build." },
+  { title: "Download", body: "Tap the download button and save Muvora to your phone." },
   {
     title: "Allow & install",
-    body: "Open the file. Android asks once to allow installs from your browser or Files app.",
+    body: "Open the file. Android asks once to allow the install. Tap allow, then install.",
   },
   { title: "Press play", body: "Open Muvora, sign in with Google for your library, or skip and just search." },
 ]
@@ -35,51 +33,39 @@ function UpdatesMockup() {
   )
 }
 
-export function Install({ release }: { release: ReleaseInfo | null }) {
-  const version = release?.version ?? FALLBACK_VERSION
-  const date = formatDate(release?.publishedAt)
-  const meta = (name: string) =>
-    [`v${version}`, formatSize(release?.sizes[name]), date].filter(Boolean).join(" · ")
-
+export function Install() {
   const options: DownloadCardProps[] = [
     {
       title: "Most phones",
       badge: "Recommended",
-      description: "The arm64 build. Right for nearly every phone from the last several years.",
+      description: "The right download for nearly every phone. Start here.",
       lightImage: IMAGES.decks,
       darkImage: IMAGES.decks,
       mockup: <MiniPhone scale={0.46} />,
       buttons: [
-        { text: "Download arm64 APK", icon: <Download className="h-4 w-4" />, variant: "default", href: apkUrl("arm64") },
+        { text: "Download Muvora", icon: <Download className="h-4 w-4" />, variant: "default", href: apkUrl("arm64") },
       ],
-      meta: meta(APK.arm64),
     },
     {
-      title: "Any device",
-      description: "The universal build runs on every CPU. Use it if the first one won't install.",
+      title: "Didn't install?",
+      description: "A version that works on every phone. Use it only if the first one won't install.",
       lightImage: IMAGES.crowd,
       darkImage: IMAGES.crowd,
-      mockup: (
-        <div className="flex items-end gap-2">
-          <MiniPhone scale={0.38} className="opacity-60" />
-          <Cpu className="mb-6 h-10 w-10 text-primary" strokeWidth={1.25} />
-        </div>
-      ),
+      mockup: <MiniPhone scale={0.46} className="opacity-70" />,
       buttons: [
-        { text: "Download universal APK", icon: <Smartphone className="h-4 w-4" />, href: apkUrl("universal") },
+        { text: "Download this version", icon: <Smartphone className="h-4 w-4" />, href: apkUrl("universal") },
       ],
-      meta: meta(APK.universal),
     },
     {
       title: "Auto-updates",
-      description: "Join as a tester and get a notification on your phone each time a new build ships.",
+      description: "Join as a tester and get a notification on your phone whenever a new version is out.",
       lightImage: IMAGES.lasers,
       darkImage: IMAGES.lasers,
       mockup: <UpdatesMockup />,
       buttons: FIREBASE_INVITE_URL
-        ? [{ text: "Join the testers", icon: <BellRing className="h-4 w-4" />, href: FIREBASE_INVITE_URL, external: true }]
-        : [{ text: "Invite link coming soon", icon: <BellRing className="h-4 w-4" />, disabled: true }],
-      meta: "Delivered through Firebase App Distribution",
+        ? [{ text: "Get updates", icon: <BellRing className="h-4 w-4" />, href: FIREBASE_INVITE_URL, external: true }]
+        : [{ text: "Coming soon", icon: <BellRing className="h-4 w-4" />, disabled: true }],
+      meta: "New versions arrive automatically",
     },
   ]
 
@@ -92,12 +78,11 @@ export function Install({ release }: { release: ReleaseInfo | null }) {
               <div>
                 <SectionLabel index="03">Install</SectionLabel>
                 <h2 className="mt-6 max-w-[14ch] text-[clamp(2.4rem,5vw,4.6rem)] font-extrabold leading-[0.95] tracking-[-0.05em]">
-                  Pick a build. <span className="text-primary">Play in a minute.</span>
+                  Download it. <span className="text-primary">Play in a minute.</span>
                 </h2>
               </div>
               <p className="max-w-[34ch] text-[15px] leading-relaxed text-muted-foreground">
-                Every button here always points at the newest release. No app store, no account
-                required, {MIN_ANDROID}.
+                Always the latest Muvora. No app store, no account needed, free forever.
               </p>
             </div>
           }
@@ -114,14 +99,14 @@ export function Install({ release }: { release: ReleaseInfo | null }) {
                 ))}
               </ol>
               <div className="mt-6 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-                <p>Updating? Install the new APK over the old one. Your library stays.</p>
+                <p>Updating? Install the new version over the old one. Your library stays.</p>
                 <a
                   href={RELEASES_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 font-semibold text-foreground underline-offset-4 hover:text-primary hover:underline"
                 >
-                  All releases & changelogs <ArrowUpRight className="h-3.5 w-3.5" />
+                  All versions & what's new <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               </div>
             </div>

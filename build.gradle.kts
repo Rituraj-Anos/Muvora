@@ -41,8 +41,11 @@ buildscript {
  * No "v" in the name — the in-app updater reads it as a number; the "v" is the
  * release tag's alone.
  */
-extra["bitchordVersionCode"] = 29
-extra["bitchordVersionName"] = "1.9.0"
+// versionName is what people see (1.0.0). versionCode only ever climbs, because
+// Android refuses to install a build whose code is lower than the one already
+// on the device; it is not shown anywhere.
+extra["bitchordVersionCode"] = 30
+extra["bitchordVersionName"] = "1.0.0"
 
 /*
  * Bump this by hand before cutting each sideloaded test build ("beta2",

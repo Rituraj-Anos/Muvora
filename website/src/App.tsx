@@ -1,5 +1,4 @@
 import { SmoothScroll } from "@/components/smooth-scroll"
-import { useLatestRelease } from "@/hooks/use-latest-release"
 import { Hero } from "@/sections/hero"
 import { Marquee } from "@/sections/marquee"
 import { Features } from "@/sections/features"
@@ -8,9 +7,6 @@ import { Legal } from "@/sections/legal"
 import { Footer } from "@/sections/footer"
 
 export default function App() {
-  // Fetched once and shared, so the hero and the install cards agree.
-  const release = useLatestRelease()
-
   return (
     <SmoothScroll>
       <a
@@ -20,10 +16,10 @@ export default function App() {
         Skip to download
       </a>
       <main>
-        <Hero release={release} />
+        <Hero />
         <Marquee />
         <Features />
-        <Install release={release} />
+        <Install />
         <Legal />
       </main>
       <Footer />

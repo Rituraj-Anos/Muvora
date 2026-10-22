@@ -24,8 +24,7 @@ export const apkUrl = (kind: ApkKind) => `${REPO_URL}/releases/latest/download/$
 export const FIREBASE_INVITE_URL = (import.meta.env.VITE_FIREBASE_INVITE_URL ?? "").trim()
 
 /** Shown before (or if) the GitHub API answers. */
-export const FALLBACK_VERSION = "1.8.1"
-export const MIN_ANDROID = "Android 8.0+"
+export const FALLBACK_VERSION = "1.0.0"
 
 /** Unsplash photography, all verified to resolve. */
 const unsplash = (id: string, w: number) =>

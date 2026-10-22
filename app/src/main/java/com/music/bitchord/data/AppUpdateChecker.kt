@@ -42,11 +42,10 @@ object AppUpdateChecker {
 
     private const val CACHE_SUBDIR = "updates"
 
-    /** Off for Muvora until it has its own release feed. */
-    private const val UPDATES_ENABLED = false
+    private const val UPDATES_ENABLED = true
 
     private const val LATEST_RELEASE_URL =
-        "https://api.github.com/repos/kushagrasinghx/BitChord/releases/latest"
+        "https://api.github.com/repos/Rituraj-Anos/Muvora/releases/latest"
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -69,8 +68,6 @@ object AppUpdateChecker {
     private var downloadCancelled = false
 
     suspend fun check() = withContext(Dispatchers.IO) {
-        // Muvora is a personal fork: upstream BitChord releases are a different
-        // app, so never offer them as an "update".
         if (!UPDATES_ENABLED) return@withContext
         runCatching {
             val request = Request.Builder().url(LATEST_RELEASE_URL).build()
@@ -100,19 +97,15 @@ object AppUpdateChecker {
     }
 
     /**
-     * One release carries the phone app and the TV app, each as a universal
-     * APK plus per-ABI splits:
+     * A Muvora release carries the universal APK plus per-ABI splits:
      *
-     *     BitChord-v1.8.apk     BitChord-v1.8_arm64-v8a.apk     ...
-     *     BitChordTV-v1.8.apk   BitChordTV-v1.8_arm64-v8a.apk   ...
+     *     Muvora-universal.apk   Muvora-arm64-v8a.apk   Muvora-armeabi-v7a.apk
      *
-     * so this app's APKs are the ones named with its own
-     * [BuildConfig.UPDATE_APK_PREFIX] — "BitChord-" never matches a TV file,
-     * since the prefix ends at the hyphen. The universal build (no `_ABI`
-     * suffix) is taken first, as it installs anywhere; failing that, the split
-     * for this device's ABI. A release with neither leaves
-     * [UpdateInfo.apkUrl] null and the UI falls back to opening the releases
-     * page.
+     * All start with [BuildConfig.UPDATE_APK_PREFIX] ("Muvora-"). The split
+     * matching this device's ABI is preferred because it is far smaller;
+     * failing that, the universal build, which installs anywhere. A release
+     * with neither leaves [UpdateInfo.apkUrl] null and the UI falls back to
+     * opening the releases page.
      */
     private fun apkAssetUrl(release: JsonObject): String? = runCatching {
         val apks = release["assets"]?.jsonArray
@@ -126,10 +119,13 @@ object AppUpdateChecker {
                 if (ours) name.removeSuffix(".apk").removeSuffix(".APK") to url else null
             }
             .orEmpty()
-        apks.firstOrNull { (name, _) -> '_' !in name }?.second
-            ?: Build.SUPPORTED_ABIS.firstNotNullOfOrNull { abi ->
-                apks.firstOrNull { (name, _) -> name.endsWith("_$abi") }?.second
-            }
+        // This device's exact ABI split first (smallest download)…
+        Build.SUPPORTED_ABIS.firstNotNullOfOrNull { abi ->
+            apks.firstOrNull { (name, _) -> name.endsWith("-$abi") }?.second
+        }
+            // …then the universal build, which runs on any ABI.
+            ?: apks.firstOrNull { (name, _) -> name.endsWith("-universal") }?.second
+            ?: apks.firstOrNull()?.second
     }.getOrNull()
 
     /**

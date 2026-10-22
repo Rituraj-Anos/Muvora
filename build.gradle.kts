@@ -44,7 +44,7 @@ buildscript {
 // versionName is what people see (1.0.0). versionCode only ever climbs, because
 // Android refuses to install a build whose code is lower than the one already
 // on the device; it is not shown anywhere.
-extra["bitchordVersionCode"] = 30
+extra["bitchordVersionCode"] = 31
 extra["bitchordVersionName"] = "1.0.0"
 
 /*

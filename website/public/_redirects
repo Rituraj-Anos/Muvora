@@ -1,5 +1,6 @@
-# Short, shareable links that always serve the newest APK.
-/download            https://github.com/Rituraj-Anos/Muvora/releases/latest/download/Muvora-arm64-v8a.apk 302
-/download/universal  https://github.com/Rituraj-Anos/Muvora/releases/latest/download/Muvora-universal.apk 302
-/source              https://github.com/Rituraj-Anos/Muvora 302
-/dmca                https://github.com/Rituraj-Anos/Muvora/blob/main/DMCA.md 302
+# Short links. The APK ones point at the streaming Function (functions/dl/),
+# not GitHub directly, so Chrome on Android doesn't block them at 100%.
+/download            /dl/Muvora-arm64-v8a.apk  302
+/download/universal  /dl/Muvora-universal.apk  302
+/source              https://github.com/Rituraj-Anos/Muvora  302
+/dmca                https://github.com/Rituraj-Anos/Muvora/blob/main/DMCA.md  302

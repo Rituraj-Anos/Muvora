@@ -18,7 +18,13 @@ export const APK = {
 
 export type ApkKind = keyof typeof APK
 
-export const apkUrl = (kind: ApkKind) => `${REPO_URL}/releases/latest/download/${APK[kind]}`
+/**
+ * Served from our own origin via a Pages Function (functions/dl/[name].ts),
+ * which streams the file from GitHub's latest release. Same-origin downloads
+ * avoid Chrome-on-Android's Safe Browsing block that fails GitHub-CDN APK
+ * downloads at 100%.
+ */
+export const apkUrl = (kind: ApkKind) => `/dl/${APK[kind]}`
 
 /** Empty until the Firebase tester invite link is set as a Pages env var. */
 export const FIREBASE_INVITE_URL = (import.meta.env.VITE_FIREBASE_INVITE_URL ?? "").trim()

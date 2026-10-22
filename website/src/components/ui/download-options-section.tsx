@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { Reveal } from "@/components/reveal"
 
 // Defines the props for a single button within a card
 export interface CardButton {
@@ -143,8 +144,10 @@ export const DownloadShowcase = ({ heading, options, footer, className }: Downlo
       <div className="flex flex-col items-center gap-10">
         {heading}
         <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-3">
-          {options.map((card) => (
-            <DownloadCard key={card.title} {...card} />
+          {options.map((card, i) => (
+            <Reveal key={card.title} delay={i * 90} className="flex">
+              <DownloadCard {...card} />
+            </Reveal>
           ))}
         </div>
         {footer}

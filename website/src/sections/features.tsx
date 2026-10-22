@@ -1,5 +1,6 @@
 import { PhoneMockup } from "@/components/phone-mockup"
 import { SectionLabel } from "@/components/section-label"
+import { Reveal } from "@/components/reveal"
 
 const FEATURES = [
   {
@@ -34,11 +35,13 @@ export function Features() {
       <div className="grid gap-16 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-10">
+            <Reveal>
             <SectionLabel index="02">What's inside</SectionLabel>
             <h2 className="mt-6 text-[clamp(2.4rem,5vw,4.6rem)] font-extrabold leading-[0.95] tracking-[-0.05em]">
               Everything a player should do.{" "}
               <span className="text-muted-foreground">Nothing it shouldn't.</span>
             </h2>
+            </Reveal>
             <div className="mt-12 hidden w-60 lg:block">
               <PhoneMockup />
             </div>
@@ -47,8 +50,10 @@ export function Features() {
 
         <ol className="lg:col-span-7">
           {FEATURES.map((f, i) => (
-            <li
+            <Reveal
+              as="li"
               key={f.title}
+              delay={i * 70}
               className="group grid grid-cols-[3rem_1fr] gap-x-4 border-t border-white/10 py-8 last:border-b sm:grid-cols-[4rem_12rem_1fr] sm:gap-x-6"
             >
               <span className="pt-1.5 font-mono text-xs text-primary">{String(i + 1).padStart(2, "0")}</span>
@@ -58,7 +63,7 @@ export function Features() {
               <p className="col-start-2 mt-2 max-w-[44ch] text-[15px] leading-relaxed text-muted-foreground sm:col-start-3 sm:mt-1">
                 {f.body}
               </p>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </div>

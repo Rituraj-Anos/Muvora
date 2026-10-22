@@ -1,3 +1,4 @@
+import { SmoothScroll } from "@/components/smooth-scroll"
 import { useLatestRelease } from "@/hooks/use-latest-release"
 import { Hero } from "@/sections/hero"
 import { Marquee } from "@/sections/marquee"
@@ -11,7 +12,7 @@ export default function App() {
   const release = useLatestRelease()
 
   return (
-    <>
+    <SmoothScroll>
       <a
         href="#download"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-black"
@@ -26,6 +27,6 @@ export default function App() {
         <Legal />
       </main>
       <Footer />
-    </>
+    </SmoothScroll>
   )
 }

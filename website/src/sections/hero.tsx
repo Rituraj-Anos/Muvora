@@ -1,4 +1,6 @@
+import { useRef } from "react"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
+import { useHeroProgress } from "@/hooks/use-hero-progress"
 import DownloadButton from "@/components/ui/button-download"
 import { Wordmark } from "@/components/muvora-mark"
 import { APK, FALLBACK_VERSION, IMAGES, MIN_ANDROID, REPO_URL, apkUrl } from "@/config"
@@ -28,25 +30,28 @@ const CAPABILITIES = [
 ]
 
 export function Hero({ release }: { release: ReleaseInfo | null }) {
+  const sectionRef = useRef<HTMLElement>(null)
+  useHeroProgress(sectionRef)
   const { status, progress, start } = useDownload(apkUrl("arm64"))
   const version = release?.version ?? FALLBACK_VERSION
   const size = formatSize(release?.sizes[APK.arm64])
 
   return (
-    <section id="top" className="px-2.5 pt-2.5 sm:px-4 sm:pt-4">
+    <section id="top" ref={sectionRef} className="px-2.5 pt-2.5 sm:px-4 sm:pt-4">
       <div className="grain relative isolate flex min-h-[min(calc(100svh-1.25rem),58rem)] flex-col overflow-hidden rounded-[22px] border border-white/10 bg-black sm:min-h-[min(calc(100svh-2rem),62rem)] sm:rounded-[28px]">
         {/* Photograph, grayscale, pushed right like an editorial cover */}
-        <picture className="absolute inset-0 -z-10">
+        <picture className="absolute inset-0 -z-10 overflow-hidden">
           <source media="(min-width: 900px)" srcSet={IMAGES.hero} />
           <img
             src={IMAGES.heroSmall}
             alt=""
             fetchPriority="high"
-            className="ml-auto h-full w-full object-cover object-[68%_center] brightness-[0.62] contrast-125 grayscale md:w-[70%] md:[mask-image:linear-gradient(to_right,transparent,black_40%)]"
+            className="hero-photo ml-auto h-full w-full object-cover object-[58%_28%] brightness-[0.72] contrast-125 grayscale md:w-[70%] md:object-[68%_center] md:brightness-[0.62] md:[mask-image:linear-gradient(to_right,transparent,black_40%)]"
           />
         </picture>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black via-black/75 to-black/0 md:via-black/30" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/10 to-black/70" />
+        {/* Phones: light veil so the figure reads; desktop: heavy left fade under the type */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/55 via-black/25 to-black/10 md:from-black md:via-black/30 md:to-black/0" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/35 to-black/60 md:via-black/10 md:to-black/70" />
 
         {/* Hairline guide columns */}
         <div aria-hidden className="pointer-events-none absolute inset-x-8 top-[33%] bottom-[24%] -z-10 hidden grid-cols-4 lg:grid">
@@ -100,16 +105,27 @@ export function Hero({ release }: { release: ReleaseInfo | null }) {
         </header>
 
         {/* Giant wordmark + headline */}
-        <div className="relative z-10 flex flex-1 flex-col justify-center px-4 pt-8 sm:px-7 lg:pt-4">
-          <h1 className="relative font-extrabold uppercase leading-[0.8] tracking-[-0.075em] text-primary text-[clamp(5.4rem,21vw,19rem)]">
+        <div className="relative z-10 flex flex-1 flex-col justify-center px-4 pt-6 sm:px-7 lg:pt-4">
+          {/* Phones size the type to the screen width so the staircase fills it;
+              the trailing pr compensates negative tracking so "RA" never clips. */}
+          <h1 className="hero-parallax-slow relative font-extrabold uppercase leading-[0.8] tracking-[-0.075em] text-primary text-[31vw] sm:text-[27vw] lg:text-[clamp(5.4rem,21vw,19rem)]">
             <span className="sr-only">Muvora, a music player for Android</span>
-            <span aria-hidden className="block">Mu</span>
-            <span aria-hidden className="block pl-[0.9em] lg:pl-[1.55em]">vo</span>
-            <span aria-hidden className="block text-right lg:pr-[0.15em]">ra</span>
+            <span aria-hidden className="rise-mask">
+              <span className="rise">Mu</span>
+            </span>
+            <span aria-hidden className="rise-mask pl-[0.78em] lg:pl-[1.55em]">
+              <span className="rise" style={{ animationDelay: "90ms" }}>vo</span>
+            </span>
+            <span aria-hidden className="rise-mask pr-[0.1em] text-right lg:pr-[0.15em]">
+              <span className="rise" style={{ animationDelay: "180ms" }}>ra</span>
+            </span>
           </h1>
 
-          <div className="mt-8 max-w-[34rem] lg:absolute lg:right-8 lg:top-2 lg:mt-0">
-            <p className="text-[clamp(2rem,4.2vw,3.6rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.045em]">
+          <div
+            className="hero-parallax-fast fade-in mt-9 max-w-[34rem] lg:absolute lg:right-8 lg:top-2 lg:mt-0"
+            style={{ animationDelay: "420ms" }}
+          >
+            <p className="text-[clamp(2.3rem,10.5vw,3.6rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.045em] lg:text-[clamp(2rem,4.2vw,3.6rem)]">
               <span className="block text-primary">Music,</span>
               <span className="block text-white">without the</span>
               <span className="block text-primary">noise.</span>
@@ -124,7 +140,10 @@ export function Hero({ release }: { release: ReleaseInfo | null }) {
         </div>
 
         {/* Bottom row */}
-        <div className="relative z-10 grid gap-10 px-5 pb-6 pt-10 sm:px-8 sm:pb-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div
+          className="fade-in relative z-10 grid gap-9 px-5 pb-6 pt-10 sm:px-8 sm:pb-8 lg:grid-cols-[1fr_auto] lg:items-end"
+          style={{ animationDelay: "600ms" }}
+        >
           <div className="flex gap-4">
             <div className="flex flex-col font-mono text-[10px] uppercase tracking-widest">
               <span className="text-white/50">Build</span>
@@ -137,7 +156,7 @@ export function Hero({ release }: { release: ReleaseInfo | null }) {
             </ul>
           </div>
 
-          <div className="flex flex-col items-start gap-3 lg:items-end">
+          <div className="order-first flex flex-col items-stretch gap-3 sm:items-start lg:order-none lg:items-end">
             <DownloadButton
               downloadStatus={status}
               progress={progress}
@@ -145,10 +164,11 @@ export function Hero({ release }: { release: ReleaseInfo | null }) {
               idleLabel="Download APK"
               workingLabel="Starting"
               doneLabel="Check downloads"
-              className="h-14 w-60 rounded-2xl text-[15px] font-bold shadow-[0_18px_50px_-15px_rgba(200,255,61,0.6)] transition-shadow duration-300 hover:shadow-[0_22px_60px_-12px_rgba(200,255,61,0.75)]"
+              className="h-14 w-full rounded-2xl text-[15px] font-bold shadow-[0_18px_50px_-15px_rgba(200,255,61,0.6)] transition-shadow duration-300 hover:shadow-[0_22px_60px_-12px_rgba(200,255,61,0.75)] sm:w-60"
             />
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/55">
-              {MIN_ANDROID} · arm64{size ? ` · ${size}` : ""} · always the latest build
+              {MIN_ANDROID} · arm64{size ? ` · ${size}` : ""}
+              <span className="hidden sm:inline"> · always the latest build</span>
             </p>
             <a
               href="#download"

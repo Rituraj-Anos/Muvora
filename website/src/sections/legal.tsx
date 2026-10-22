@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SectionLabel } from "@/components/section-label"
+import { Reveal } from "@/components/reveal"
 import { DMCA_URL, ISSUES_URL, LICENSE_URL, REPO_URL, UPSTREAM_URL } from "@/config"
 
 const POINTS = [
@@ -34,7 +35,7 @@ export function Legal() {
   return (
     <section id="legal" className="scroll-mt-6 border-t border-white/10">
       <div className="mx-auto grid max-w-[1400px] gap-16 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12">
-        <div className="lg:col-span-4">
+        <Reveal className="lg:col-span-4">
           <SectionLabel index="04">Legal</SectionLabel>
           <h2 className="mt-6 text-[clamp(2.4rem,5vw,4.6rem)] font-extrabold leading-[0.95] tracking-[-0.05em]">
             The fine print, <span className="text-muted-foreground">in plain words.</span>
@@ -51,17 +52,17 @@ export function Legal() {
               </a>
             </Button>
           </div>
-        </div>
+        </Reveal>
 
         <dl className="grid gap-x-10 sm:grid-cols-2 lg:col-span-8">
           {POINTS.map((p, i) => (
-            <div key={p.title} className="border-t border-white/10 py-7">
+            <Reveal key={p.title} delay={(i % 2) * 90} className="border-t border-white/10 py-7">
               <dt className="flex items-baseline gap-3 text-lg font-extrabold uppercase tracking-[-0.03em]">
                 <span className="font-mono text-[11px] font-normal text-primary">{String(i + 1).padStart(2, "0")}</span>
                 {p.title}
               </dt>
               <dd className="mt-2 pl-8 text-sm leading-relaxed text-muted-foreground">{p.body}</dd>
-            </div>
+            </Reveal>
           ))}
         </dl>
       </div>

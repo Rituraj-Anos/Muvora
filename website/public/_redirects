@@ -1,0 +1,5 @@
+# Short, shareable links that always serve the newest APK.
+/download            https://github.com/Rituraj-Anos/Muvora/releases/latest/download/Muvora-arm64-v8a.apk 302
+/download/universal  https://github.com/Rituraj-Anos/Muvora/releases/latest/download/Muvora-universal.apk 302
+/source              https://github.com/Rituraj-Anos/Muvora 302
+/dmca                https://github.com/Rituraj-Anos/Muvora/blob/main/DMCA.md 302

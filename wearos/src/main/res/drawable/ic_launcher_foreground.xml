@@ -1,0 +1,85 @@
+<!--
+  Muvora mark: a rounded "M" flanked by two pairs of equalizer bars.
+  Drawn in source coordinates (bbox x 265..760, y 290..545, centre 512.5,417.5),
+  then centred on the 1024 canvas and scaled to sit inside the adaptive-icon
+  safe zone (a 676px circle). Each shape is its own path so overlapping
+  pieces of the M never cancel out under the non-zero fill rule.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+    <group
+        android:pivotX="512.5"
+        android:pivotY="417.5"
+        android:scaleX="1.15"
+        android:scaleY="1.15"
+        android:translateX="-0.5"
+        android:translateY="94.5">
+
+        <!-- Equalizer bars -->
+        <path
+            android:fillColor="#FFB8F53A"
+            android:pathData="M265,415A15,15 0,0 1,295 415V455A15,15 0,0 1,265 455Z" />
+        <path
+            android:fillColor="#FFC4F83C"
+            android:pathData="M315,380A15,15 0,0 1,345 380V485A15,15 0,0 1,315 485Z" />
+        <path
+            android:fillColor="#FFC4F83C"
+            android:pathData="M680,380A15,15 0,0 1,710 380V485A15,15 0,0 1,680 485Z" />
+        <path
+            android:fillColor="#FFB8F53A"
+            android:pathData="M730,415A15,15 0,0 1,760 415V455A15,15 0,0 1,730 455Z" />
+
+        <!-- M: left leg -->
+        <path android:pathData="M370,320A30,30 0,0 1,430 320V515A30,30 0,0 1,370 515Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="400" android:startY="290"
+                    android:endX="625" android:endY="545">
+                    <item android:color="#FFD9FF3A" android:offset="0.0" />
+                    <item android:color="#FFA3F552" android:offset="1.0" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <!-- M: right leg -->
+        <path android:pathData="M595,320A30,30 0,0 1,655 320V515A30,30 0,0 1,595 515Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="400" android:startY="290"
+                    android:endX="625" android:endY="545">
+                    <item android:color="#FFD9FF3A" android:offset="0.0" />
+                    <item android:color="#FFA3F552" android:offset="1.0" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <!-- M: left diagonal -->
+        <path android:pathData="M376.91,339.15L488.91,474.15A30,30 0,0 0,535.09 435.85L423.09,300.85A30,30 0,0 0,376.91 339.15Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="400" android:startY="290"
+                    android:endX="625" android:endY="545">
+                    <item android:color="#FFD9FF3A" android:offset="0.0" />
+                    <item android:color="#FFA3F552" android:offset="1.0" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <!-- M: right diagonal -->
+        <path android:pathData="M648.09,339.15L536.09,474.15A30,30 0,0 1,489.91 435.85L601.91,300.85A30,30 0,0 1,648.09 339.15Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="400" android:startY="290"
+                    android:endX="625" android:endY="545">
+                    <item android:color="#FFD9FF3A" android:offset="0.0" />
+                    <item android:color="#FFA3F552" android:offset="1.0" />
+                </gradient>
+            </aapt:attr>
+        </path>
+    </group>
+</vector>

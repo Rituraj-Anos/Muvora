@@ -1,0 +1,27 @@
+<!--
+  Status-bar / notification variant of the Muvora mark. The system keeps only
+  the alpha channel, so fills are opaque white. The mark (495x255 source units,
+  centred on 512.5,417.5) is scaled to 22 wide and centred in a 24x24 canvas.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group
+        android:pivotX="512.5"
+        android:pivotY="417.5"
+        android:scaleX="0.04444"
+        android:scaleY="0.04444"
+        android:translateX="-500.5"
+        android:translateY="-405.5">
+        <path android:fillColor="#FFFFFFFF" android:pathData="M265,415A15,15 0,0 1,295 415V455A15,15 0,0 1,265 455Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M315,380A15,15 0,0 1,345 380V485A15,15 0,0 1,315 485Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M680,380A15,15 0,0 1,710 380V485A15,15 0,0 1,680 485Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M730,415A15,15 0,0 1,760 415V455A15,15 0,0 1,730 455Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M370,320A30,30 0,0 1,430 320V515A30,30 0,0 1,370 515Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M595,320A30,30 0,0 1,655 320V515A30,30 0,0 1,595 515Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M376.91,339.15L488.91,474.15A30,30 0,0 0,535.09 435.85L423.09,300.85A30,30 0,0 0,376.91 339.15Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M648.09,339.15L536.09,474.15A30,30 0,0 1,489.91 435.85L601.91,300.85A30,30 0,0 1,648.09 339.15Z" />
+    </group>
+</vector>

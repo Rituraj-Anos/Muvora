@@ -33,6 +33,15 @@
 
 <img src="Banner.png" alt="Muvora banner" width="100%" />
 
+<br/>
+<br/>
+
+<img src="docs/screenshots/home.png" alt="Home" width="30%" />
+&nbsp;&nbsp;
+<img src="docs/screenshots/player.png" alt="Now playing" width="30%" />
+&nbsp;&nbsp;
+<img src="docs/screenshots/lyrics.png" alt="Synced lyrics" width="30%" />
+
 <h1><a id="features"></a>Features</h1>
 
 <table>

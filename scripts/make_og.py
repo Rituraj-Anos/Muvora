@@ -132,7 +132,7 @@ def main():
 
     # --- tagline ---
     tag = font(FB, int(40 * SS))
-    d.text((int(152 * SS), int(432 * SS)), "Music, without the noise.", font=tag, fill=LIME)
+    d.text((int(152 * SS), int(432 * SS)), "Music moves with you.", font=tag, fill=LIME)
 
     sub = font(FB, int(26 * SS))
     d.text((int(152 * SS), int(486 * SS)),

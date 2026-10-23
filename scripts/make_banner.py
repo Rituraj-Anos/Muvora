@@ -86,7 +86,7 @@ def main():
     d.text((wx, wy), "Muvora", font=word, fill=WHITE)
 
     tag = ImageFont.truetype(FB, int(38 * SS))
-    d.text((wx + int(6 * SS), wy + int(168 * SS)), "Music, without the noise.", font=tag, fill=LIME)
+    d.text((wx + int(6 * SS), wy + int(168 * SS)), "Music moves with you.", font=tag, fill=LIME)
 
     out = img.convert("RGB").resize((W, H), Image.LANCZOS)
     out.save(OUT)

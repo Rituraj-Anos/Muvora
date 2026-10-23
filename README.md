@@ -7,7 +7,7 @@
 
 # Muvora
 
-### Music, without the noise.
+### Music moves with you.
 
 <br/>
 

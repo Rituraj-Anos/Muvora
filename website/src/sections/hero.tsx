@@ -122,9 +122,9 @@ export function Hero() {
             style={{ animationDelay: "420ms" }}
           >
             <p className="text-[clamp(2.3rem,10.5vw,3.6rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.045em] lg:text-[clamp(2rem,4.2vw,3.6rem)]">
-              <span className="block text-primary">Music,</span>
-              <span className="block text-white">without the</span>
-              <span className="block text-primary">noise.</span>
+              <span className="block text-primary">Music</span>
+              <span className="block text-white">moves</span>
+              <span className="block text-primary">with you.</span>
             </p>
             <div className="mt-4 border-l-[3px] border-primary pl-3">
               <p className="text-sm font-extrabold uppercase tracking-tight text-primary">Muvora for Android</p>
